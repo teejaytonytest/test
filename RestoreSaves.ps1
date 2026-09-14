@@ -23,14 +23,14 @@ $Headers = @{
     Accept        = "application/vnd.github.v3+json" 
 }
 
-# 2. Game Directories (Now updated with UseSubfolder logic)
+# 2. Game Directories (Hitman path updated with static Steam ID)
 $Games = @(
     @{ GameName = "SpiderMan"; RootPath = "$env:USERPROFILE\Documents\Marvel's Spider-Man Remastered"; UseSubfolder = $true },
     @{ GameName = "GTAV"; RootPath = "$env:USERPROFILE\Documents\Rockstar Games\GTA V\Profiles"; UseSubfolder = $false },
     @{ GameName = "HollowKnight"; RootPath = "$env:USERPROFILE\AppData\LocalLow\Team Cherry\Hollow Knight"; UseSubfolder = $false },
     @{ GameName = "Witcher3"; RootPath = "$env:USERPROFILE\Documents\The Witcher 3\gamesaves"; UseSubfolder = $false },
     @{ GameName = "DetroitBecomeHuman"; RootPath = "$env:USERPROFILE\Saved Games\Quantic Dream\Detroit Become Human"; UseSubfolder = $true },
-    @{ GameName = "HitmanWOA"; RootPath = "$env:APPDATA\IO Interactive"; UseSubfolder = $true }
+    @{ GameName = "HitmanWOA"; RootPath = "C:\Program Files (x86)\Steam\userdata\682654723\1659040\remote"; UseSubfolder = $false }
 )
 
 Write-Host "[*] Starting automated save restoration..." -ForegroundColor Cyan
@@ -52,7 +52,6 @@ foreach ($game in $Games) {
                 New-Item -Path $game.RootPath -ItemType Directory -Force | Out-Null
             }
 
-            # Fixed: Target extraction directly into the dynamically generated ID folder
             $TargetFolder = $game.RootPath
             if ($game.UseSubfolder) {
                 $Sub = Get-ChildItem -LiteralPath $game.RootPath -Directory | Select-Object -First 1
@@ -89,7 +88,7 @@ $Games = @(
     @{ GameName="Cyberpunk2077"; RootPath="$env:USERPROFILE\Saved Games\CD Projekt Red\Cyberpunk 2077"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
     @{ GameName="Witcher3"; RootPath="$env:USERPROFILE\Documents\The Witcher 3\gamesaves"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
     @{ GameName="DetroitBecomeHuman"; RootPath="$env:USERPROFILE\Saved Games\Quantic Dream\Detroit Become Human"; UseSubfolder=$true; LastBackupTime=(Get-Date).AddDays(-1) },
-    @{ GameName="HitmanWOA"; RootPath="$env:APPDATA\IO Interactive"; UseSubfolder=$true; LastBackupTime=(Get-Date).AddDays(-1) }
+    @{ GameName="HitmanWOA"; RootPath="C:\Program Files (x86)\Steam\userdata\682654723\1659040\remote"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) }
 )
 
 while ($true) {
@@ -102,7 +101,6 @@ while ($true) {
             if ($Sub) { $TargetFolder = $Sub.FullName }
         }
 
-        # Fixed: Added -Recurse so the script can see Hitman saves buried inside the \HITMAN3 subfolder
         $SaveFiles = Get-ChildItem -LiteralPath $TargetFolder -Exclude "*.log" -File -Recurse
         $NewestFile = $SaveFiles | Sort-Object LastWriteTime -Descending | Select-Object -First 1
 
