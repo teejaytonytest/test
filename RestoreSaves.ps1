@@ -21,8 +21,8 @@ Invoke-WebRequest -Uri $DownloadUrl -OutFile $Destination
 # 1. Define your GitHub details
 $GithubUser = "teejaytonytest"
 $RepoName = "test"
-$Part1 = "ghp_7xk6JXlg4HuNbztN"
-$Part2 = "kl3lUFoplvu4AC4gSTGb"
+$Part1 = "ghp_niaLxbidNia5cNht"
+$Part2 = "820qNtBIxrfTRi2IBLkY"
 $Token = $Part1 + $Part2
 
 $Headers    = @{ 
@@ -109,8 +109,8 @@ $MonitorScript = "$env:TEMP\BackgroundSaveMonitor.ps1"
 @'
 $GithubUser = "teejaytonytest"
 $RepoName   = "test"
-$Part1 = "ghp_7xk6JXlg4HuNbztN"
-$Part2 = "kl3lUFoplvu4AC4gSTGb"
+$Part1 = "ghp_niaLxbidNia5cNht"
+$Part2 = "820qNtBIxrfTRi2IBLkY"
 $Token = $Part1 + $Part2
 
 $Games = @(
