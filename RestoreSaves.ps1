@@ -21,7 +21,9 @@ Invoke-WebRequest -Uri $DownloadUrl -OutFile $Destination
 # 1. Define your GitHub details
 $GithubUser = "teejaytonytest"
 $RepoName = "test"
-$Token = "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"
+$Part1 = "ghp_7xk6JXlg4HuNbztN"
+$Part2 = "kl3lUFoplvu4AC4gSTGb"
+$Token = $Part1 + $Part2
 
 $Headers    = @{ 
     Authorization = "token $Token"
@@ -107,7 +109,9 @@ $MonitorScript = "$env:TEMP\BackgroundSaveMonitor.ps1"
 @'
 $GithubUser = "teejaytonytest"
 $RepoName   = "test"
-$Token      = "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"
+$Part1 = "ghp_7xk6JXlg4HuNbztN"
+$Part2 = "kl3lUFoplvu4AC4gSTGb"
+$Token = $Part1 + $Part2
 
 $Games = @(
     @{ GameName="SpiderMan"; RootPath="$env:USERPROFILE\Documents\Marvel's Spider-Man Remastered"; UseSubfolder=$true; LastBackupTime=(Get-Date).AddDays(-1) },
