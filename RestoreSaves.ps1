@@ -136,5 +136,7 @@ while ($true) {
 
 Start-Process powershell.exe -WindowStyle Hidden -ArgumentList "-ExecutionPolicy Bypass -NoProfile -File `"$MonitorScript`""
 
+Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe' AND CommandLine LIKE '%BackgroundSaveMonitor.ps1%'" | Select-Object ProcessId, CommandLine
+
 Write-Host "[✓] Save monitor is now running silently in the background!" -ForegroundColor Green
 Write-Host "[*] You can safely close this PowerShell window and start playing." -ForegroundColor Yellow
