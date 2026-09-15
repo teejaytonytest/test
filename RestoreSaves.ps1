@@ -110,7 +110,8 @@ while ($true) {
             $FileName  = "$($game.GameName)_$TimeStamp.zip"
 
             try {
-                Get-ChildItem -Path "$TargetFolder\*" -Exclude "*.log" | Compress-Archive -DestinationPath $ZipPath -Force
+                # Fixed: Passing the path directly prevents PowerShell from flattening the folder tree structure
+                Compress-Archive -Path "$TargetFolder\*" -DestinationPath $ZipPath -Force
                 $FileBytes = [System.IO.File]::ReadAllBytes($ZipPath)
                 $Base64    = [System.Convert]::ToBase64String($FileBytes)
 
