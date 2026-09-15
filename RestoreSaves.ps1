@@ -23,14 +23,14 @@ $Headers = @{
     Accept        = "application/vnd.github.v3+json" 
 }
 
-# 2. Game Directories
+# 2. Game Directories (Hitman path updated to root 1659040 folder)
 $Games = @(
     @{ GameName = "SpiderMan"; RootPath = "$env:USERPROFILE\Documents\Marvel's Spider-Man Remastered"; UseSubfolder = $true },
     @{ GameName = "GTAV"; RootPath = "$env:USERPROFILE\Documents\Rockstar Games\GTA V\Profiles"; UseSubfolder = $false },
     @{ GameName = "HollowKnight"; RootPath = "$env:USERPROFILE\AppData\LocalLow\Team Cherry\Hollow Knight"; UseSubfolder = $false },
     @{ GameName = "Witcher3"; RootPath = "$env:USERPROFILE\Documents\The Witcher 3\gamesaves"; UseSubfolder = $false },
     @{ GameName = "DetroitBecomeHuman"; RootPath = "$env:USERPROFILE\Saved Games\Quantic Dream\Detroit Become Human"; UseSubfolder = $true },
-    @{ GameName = "HitmanWOA"; RootPath = "C:\Program Files (x86)\Steam\userdata\682654723\1659040\remote"; UseSubfolder = $false }
+    @{ GameName = "HitmanWOA"; RootPath = "C:\Program Files (x86)\Steam\userdata\682654723\1659040"; UseSubfolder = $false }
 )
 
 Write-Host "[*] Starting automated save restoration..." -ForegroundColor Cyan
@@ -88,7 +88,7 @@ $Games = @(
     @{ GameName="Cyberpunk2077"; RootPath="$env:USERPROFILE\Saved Games\CD Projekt Red\Cyberpunk 2077"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
     @{ GameName="Witcher3"; RootPath="$env:USERPROFILE\Documents\The Witcher 3\gamesaves"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
     @{ GameName="DetroitBecomeHuman"; RootPath="$env:USERPROFILE\Saved Games\Quantic Dream\Detroit Become Human"; UseSubfolder=$true; LastBackupTime=(Get-Date).AddDays(-1) },
-    @{ GameName="HitmanWOA"; RootPath="C:\Program Files (x86)\Steam\userdata\682654723\1659040\remote"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) }
+    @{ GameName="HitmanWOA"; RootPath="C:\Program Files (x86)\Steam\userdata\682654723\1659040"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) }
 )
 
 while ($true) {
