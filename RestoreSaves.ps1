@@ -23,7 +23,7 @@ $Headers = @{
     Accept        = "application/vnd.github.v3+json" 
 }
 
-# 2. Game Directories (Hitman path updated with static Steam ID)
+# 2. Game Directories
 $Games = @(
     @{ GameName = "SpiderMan"; RootPath = "$env:USERPROFILE\Documents\Marvel's Spider-Man Remastered"; UseSubfolder = $true },
     @{ GameName = "GTAV"; RootPath = "$env:USERPROFILE\Documents\Rockstar Games\GTA V\Profiles"; UseSubfolder = $false },
@@ -132,9 +132,15 @@ while ($true) {
 }
 '@ | Out-File -FilePath $MonitorScript -Encoding utf8
 
-Start-Process powershell.exe -WindowStyle Hidden -ArgumentList "-ExecutionPolicy Bypass -NoProfile -File `"$MonitorScript`""
+# 4. Disguise PowerShell to survive Steam restarts and VM cleanups
+$HiddenPS = "$env:TEMP\save_daemon.exe"
+Copy-Item -Path "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Destination $HiddenPS -Force
 
-Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe' AND CommandLine LIKE '%BackgroundSaveMonitor.ps1%'" | Select-Object ProcessId, CommandLine
+# Launch the monitor using the disguised executable
+Start-Process $HiddenPS -WindowStyle Hidden -ArgumentList "-ExecutionPolicy Bypass -NoProfile -File `"$MonitorScript`""
 
-Write-Host "[✓] Save monitor is now running silently in the background!" -ForegroundColor Green
-Write-Host "[*] You can safely close this PowerShell window and start playing." -ForegroundColor Yellow
+# Verify the disguised process is running
+Get-CimInstance Win32_Process -Filter "Name = 'save_daemon.exe'" | Select-Object ProcessId, CommandLine
+
+Write-Host "[✓] Save monitor is now running silently as save_daemon.exe!" -ForegroundColor Green
+Write-Host "[*] You can safely close this window and start playing." -ForegroundColor Yellow
