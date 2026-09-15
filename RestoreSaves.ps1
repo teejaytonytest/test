@@ -134,12 +134,17 @@ while ($true) {
 
 # 4. Disguise PowerShell to survive Steam restarts and VM cleanups
 $HiddenPS = "$env:TEMP\save_daemon.exe"
-Copy-Item -Path "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Destination $HiddenPS -Force
+$HiddenConfig = "$env:TEMP\save_daemon.exe.config"
 
-# Launch the monitor using the disguised executable
+# Copy both the executable and its required .NET framework configuration file
+Copy-Item -Path "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Destination $HiddenPS -Force
+Copy-Item -Path "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe.config" -Destination $HiddenConfig -Force
+
+# Launch the monitor using the fully configured disguised executable
 Start-Process $HiddenPS -WindowStyle Hidden -ArgumentList "-ExecutionPolicy Bypass -NoProfile -File `"$MonitorScript`""
 
-# Verify the disguised process is running
+# Wait a brief moment to ensure it initializes, then verify
+Start-Sleep -Seconds 2
 Get-CimInstance Win32_Process -Filter "Name = 'save_daemon.exe'" | Select-Object ProcessId, CommandLine
 
 Write-Host "[✓] Save monitor is now running silently as save_daemon.exe!" -ForegroundColor Green
