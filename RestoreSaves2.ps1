@@ -12,7 +12,7 @@ $Token      = $Part1 + $Part2
 $Games = @(
     @{ GameName="SpiderMan"; RootPath="$env:USERPROFILE\Documents\Marvel's Spider-Man Remastered"; UseSubfolder=$true; LastBackupTime=(Get-Date).AddDays(-1) },
     @{ GameName="GTAV"; RootPath="$env:USERPROFILE\Documents\Rockstar Games\GTA V\Profiles"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
-    @{ GameName="RDR2"; RootPath="$env:USERPROFILE\Documents\Rockstar Games\Red Dead Redemption 2\Profiles"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
+    @{ GameName="RDR2"; RootPath="$env:APPDATA\.1911\Red Dead Redemption 2\profile"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
     @{ GameName="HollowKnight"; RootPath="$env:USERPROFILE\AppData\LocalLow\Team Cherry\Hollow Knight"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
     @{ GameName="Cyberpunk2077"; RootPath="$env:USERPROFILE\Saved Games\CD Projekt Red\Cyberpunk 2077"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
     @{ GameName="Witcher3"; RootPath="$env:USERPROFILE\Documents\The Witcher 3\gamesaves"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
