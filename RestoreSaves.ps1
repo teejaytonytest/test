@@ -25,6 +25,7 @@ $Headers = @{
 
 # 2. Game Directories (Expanded Roster)
 $Games = @(
+    @{ GameName = "AlienIsolation"; RootPath = "C:\Program Files (x86)\Steam\userdata\682654723\214490"; UseSubfolder = $false },
     @{ GameName = "SpiderMan"; RootPath = "$env:USERPROFILE\Documents\Marvel's Spider-Man Remastered"; UseSubfolder = $true },
     @{ GameName = "GTAV"; RootPath = "$env:USERPROFILE\Documents\Rockstar Games\GTA V\Profiles"; UseSubfolder = $false },
     @{ GameName = "RDR2"; RootPath = "$env:APPDATA\.1911\Red Dead Redemption 2\profile"; UseSubfolder = $false },
