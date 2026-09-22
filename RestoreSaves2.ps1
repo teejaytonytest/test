@@ -18,6 +18,7 @@ $Games = @(
     @{ GameName="Witcher3"; RootPath="$env:USERPROFILE\Documents\The Witcher 3\gamesaves"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
     @{ GameName="DetroitBecomeHuman"; RootPath="$env:USERPROFILE\Saved Games\Quantic Dream\Detroit Become Human"; UseSubfolder=$true; LastBackupTime=(Get-Date).AddDays(-1) },
     @{ GameName="HitmanWOA"; RootPath="C:\Program Files (x86)\Steam\userdata\682654723\1659040"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
+    @{ GameName="AlienIsolation"; RootPath="C:\Program Files (x86)\Steam\userdata\682654723\214490"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
     @{ GameName="Tekken7"; RootPath="$env:LOCALAPPDATA\TekkenGame\Saved\SaveGames\TEKKEN7"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
     @{ GameName="F1Manager"; RootPath="$env:LOCALAPPDATA\F1Manager24\Saved\SaveGames"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
     @{ GameName="NoMansSky"; RootPath="$env:APPDATA\HelloGames\NMS"; UseSubfolder=$false; LastBackupTime=(Get-Date).AddDays(-1) },
