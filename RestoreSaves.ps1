@@ -53,8 +53,7 @@ Write-Host "[*] Downloading Project Lightning..." -ForegroundColor Cyan
 Invoke-WebRequest -Uri $LightningUrl -OutFile $LightningDest
 
 Write-Host "[*] Installing Project Lightning silently..." -ForegroundColor Cyan
-# Uses standard /S switch; this assumes it is an NSIS installer like LuaTools
-Start-Process -FilePath $LightningDest -ArgumentList "/S" -Wait -NoNewWindow
+Start-Process -FilePath $LightningDest -ArgumentList "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART" -Wait -NoNewWindow
 Write-Host "[✓] Project Lightning installed successfully!" -ForegroundColor Green
 
 # 5. GitHub Details
