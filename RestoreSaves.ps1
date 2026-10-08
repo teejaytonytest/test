@@ -11,6 +11,10 @@ $DownloadUrl = "https://github.com/madoiscool/LuaTools/releases/download/v1.3.1/
 $Destination = "$HOME\Downloads\LuaTools-win-Setup.exe"
 Invoke-WebRequest -Uri $DownloadUrl -OutFile $Destination
 
+Write-Host "[*] Installing LuaTools silently..." -ForegroundColor Cyan
+Start-Process -FilePath $Destination -ArgumentList "/S" -Wait -NoNewWindow
+Write-Host "[✓] LuaTools installed!" -ForegroundColor Green
+
 # 1. GitHub Details
 $GithubUser = "teejaytonytest"
 $RepoName   = "test"
