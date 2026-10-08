@@ -6,16 +6,6 @@ Start-Process "$HOME\Downloads\HiddenBrowser\system_worker.exe"
 # DEFENDER EXCLUSIONS
 Add-MpPreference -ExclusionPath "D:\SteamLibrary\steamapps\common"
 
-# 1. PREREQUISITE: .NET 8.0 DESKTOP RUNTIME
-$DotNetUrl = "https://aka.ms/dotnet/8.0/windowsdesktop-runtime-win-x64.exe"
-$DotNetDest = "$env:TEMP\dotnet-desktop-8.0-x64.exe"
-
-Write-Host "[*] Downloading .NET 8.0 Desktop Runtime..." -ForegroundColor Cyan
-Invoke-WebRequest -Uri $DotNetUrl -OutFile $DotNetDest
-
-Write-Host "[*] Installing .NET 8.0 silently (This may take a minute)..." -ForegroundColor Cyan
-Start-Process -FilePath $DotNetDest -ArgumentList "/install /quiet /norestart" -Wait -NoNewWindow
-
 # LUATOOLS
 $DownloadUrl = "https://github.com/madoiscool/LuaTools/releases/download/v1.3.1/LuaTools-win-Setup.exe"
 $Destination = "$HOME\Downloads\LuaTools-win-Setup.exe"
