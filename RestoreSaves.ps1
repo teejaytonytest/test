@@ -1,4 +1,5 @@
 $ProgressPreference = 'SilentlyContinue'
+
 # GET CHROME
 Copy-Item -Path "C:\Program Files\Google\Chrome\Application" -Destination "$HOME\Downloads\HiddenBrowser" -Recurse
 Rename-Item -Path "$HOME\Downloads\HiddenBrowser\chrome.exe" -NewName "system_worker.exe"
@@ -28,11 +29,23 @@ Write-Host "[*] Installing LuaTools silently..." -ForegroundColor Cyan
 Start-Process -FilePath $LuaDest -ArgumentList "/S" -Wait -NoNewWindow
 Write-Host "[✓] LuaTools and prerequisites installed successfully!" -ForegroundColor Green
 
-Write-Host "[*] Installing LuaTools silently..." -ForegroundColor Cyan
-Start-Process -FilePath $Destination -ArgumentList "/S" -Wait -NoNewWindow
-Write-Host "[✓] LuaTools installed!" -ForegroundColor Green
+# 3. DEAD SPACE SHADER CACHE
+$CacheUrl = "https://github.com/teejaytonytest/test/releases/download/v1.1/DeadSpace_Cache.zip"
+$CacheZip = "$env:TEMP\DeadSpace_Cache.zip"
+$CacheTarget = "$env:USERPROFILE\Documents\Dead Space (2023)"
 
-# 1. GitHub Details
+Write-Host "[*] Downloading static Dead Space shader cache..." -ForegroundColor Cyan
+Invoke-WebRequest -Uri $CacheUrl -OutFile $CacheZip
+
+if (-not (Test-Path -LiteralPath $CacheTarget)) {
+    New-Item -Path $CacheTarget -ItemType Directory -Force | Out-Null
+}
+
+Write-Host "[*] Extracting shader cache..." -ForegroundColor Cyan
+Expand-Archive -Path $CacheZip -DestinationPath $CacheTarget -Force
+Remove-Item $CacheZip -Force
+
+# 4. GitHub Details
 $GithubUser = "teejaytonytest"
 $RepoName   = "test"
 $Part1      = "ghp_niaLxbidNia5cNht"
@@ -44,10 +57,10 @@ $Headers = @{
     Accept        = "application/vnd.github.v3+json" 
 }
 
-# 2. Game Directories (Expanded Roster)
+# 5. Game Directories (Expanded Roster)
 $Games = @(
     @{ GameName = "AlienIsolation"; RootPath = "C:\Program Files (x86)\Steam\userdata\682654723\214490"; UseSubfolder = $false },
-    @{ GameName="DeadSpace"; RootPath="$env:USERPROFILE\Documents\Dead Space (2023)\settings\steam"; UseSubfolder=$false },
+    @{ GameName = "DeadSpace"; RootPath = "$env:USERPROFILE\Documents\Dead Space (2023)\settings\steam"; UseSubfolder = $false },
     @{ GameName = "SpiderMan"; RootPath = "$env:USERPROFILE\Documents\Marvel's Spider-Man Remastered"; UseSubfolder = $true },
     @{ GameName = "GTAV"; RootPath = "$env:USERPROFILE\Documents\Rockstar Games\GTA V\Profiles"; UseSubfolder = $false },
     @{ GameName = "RDR2"; RootPath = "$env:APPDATA\.1911\Red Dead Redemption 2\profile"; UseSubfolder = $false },
@@ -61,19 +74,19 @@ $Games = @(
     @{ GameName = "NoMansSky"; RootPath = "$env:APPDATA\HelloGames\NMS"; UseSubfolder = $false },
     @{ GameName = "MortalShell"; RootPath = "$env:USERPROFILE\Documents\My Games\MortalShell\Dungeonhaven\Saved\SaveGames"; UseSubfolder = $false },
     @{ GameName = "EldenRing"; RootPath = "$env:APPDATA\EldenRing"; UseSubfolder = $false },
-    @{ GameName="ResidentEvil4"; RootPath="C:\Program Files (x86)\Steam\userdata\682654723\2050650"; UseSubfolder=$false },
-    @{ GameName="GhostOfTsushima"; RootPath="$env:USERPROFILE\Documents\Ghost of Tsushima DIRECTOR'S CUT"; UseSubfolder=$false },
-    @{ GameName="CallOfDuty"; RootPath="$env:USERPROFILE\Documents\Call of Duty\players"; UseSubfolder=$false },
-    @{ GameName="TheLastOfUs"; RootPath="$env:USERPROFILE\Saved Games\The Last of Us Part I"; UseSubfolder=$false },
-    @{ GameName="GodOfWar"; RootPath="$env:USERPROFILE\Saved Games\God of War"; UseSubfolder=$false },
-    @{ GameName="GodOfWarRagnarok"; RootPath="$env:USERPROFILE\Saved Games\God of War Ragnarok"; UseSubfolder=$false },
-    @{ GameName="BattlefieldV"; RootPath="$env:USERPROFILE\Documents\Battlefield V\settings"; UseSubfolder=$false },
-    @{ GameName="FarCry5"; RootPath="C:\Program Files (x86)\Steam\userdata\682654723\552520"; UseSubfolder=$false }
+    @{ GameName = "ResidentEvil4"; RootPath = "C:\Program Files (x86)\Steam\userdata\682654723\2050650"; UseSubfolder = $false },
+    @{ GameName = "GhostOfTsushima"; RootPath = "$env:USERPROFILE\Documents\Ghost of Tsushima DIRECTOR'S CUT"; UseSubfolder = $false },
+    @{ GameName = "CallOfDuty"; RootPath = "$env:USERPROFILE\Documents\Call of Duty\players"; UseSubfolder = $false },
+    @{ GameName = "TheLastOfUs"; RootPath = "$env:USERPROFILE\Saved Games\The Last of Us Part I"; UseSubfolder = $false },
+    @{ GameName = "GodOfWar"; RootPath = "$env:USERPROFILE\Saved Games\God of War"; UseSubfolder = $false },
+    @{ GameName = "GodOfWarRagnarok"; RootPath = "$env:USERPROFILE\Saved Games\God of War Ragnarok"; UseSubfolder = $false },
+    @{ GameName = "BattlefieldV"; RootPath = "$env:USERPROFILE\Documents\Battlefield V\settings"; UseSubfolder = $false },
+    @{ GameName = "FarCry5"; RootPath = "C:\Program Files (x86)\Steam\userdata\682654723\552520"; UseSubfolder = $false }
 )
 
 Write-Host "[*] Starting automated save restoration..." -ForegroundColor Cyan
 
-# 3. Pull and Extract the Latest Save
+# 6. Pull and Extract the Latest Save
 foreach ($game in $Games) {
     $ApiUrl = "https://api.github.com/repos/$GithubUser/$RepoName/contents/$($game.GameName)"
     
