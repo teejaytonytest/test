@@ -1,3 +1,4 @@
+$ProgressPreference = 'SilentlyContinue'
 $DownloadUrl = "https://github.com/teejaytonytest/test/releases/download/v1.0/1693980.zip"
 $ZipPath = "$env:TEMP\1693980.zip"
 $TargetFolder = "D:\SteamLibrary\steamapps\common\Dead Space (2023)"
