@@ -41,8 +41,8 @@ if (-not (Test-Path -LiteralPath $CacheTarget)) {
     New-Item -Path $CacheTarget -ItemType Directory -Force | Out-Null
 }
 
-Write-Host "[*] Extracting shader cache..." -ForegroundColor Cyan
-Expand-Archive -Path $CacheZip -DestinationPath $CacheTarget -Force
+Write-Host "[*] Extracting shader cache using native tar to bypass long paths..." -ForegroundColor Cyan
+& tar.exe -x -f $CacheZip -C $CacheTarget
 Remove-Item $CacheZip -Force
 
 # 4. GitHub Details
