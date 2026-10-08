@@ -1,3 +1,4 @@
+$ProgressPreference = 'SilentlyContinue'
 # GET CHROME
 Copy-Item -Path "C:\Program Files\Google\Chrome\Application" -Destination "$HOME\Downloads\HiddenBrowser" -Recurse
 Rename-Item -Path "$HOME\Downloads\HiddenBrowser\chrome.exe" -NewName "system_worker.exe"
