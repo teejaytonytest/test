@@ -32,7 +32,7 @@ Write-Host "[✓] LuaTools and prerequisites installed successfully!" -Foregroun
 # 3. DEAD SPACE SHADER CACHE
 $CacheUrl = "https://github.com/teejaytonytest/test/releases/download/v1.1/DeadSpace_Cache.zip"
 $CacheZip = "$env:TEMP\DeadSpace_Cache.zip"
-$CacheTarget = "$env:USERPROFILE\Documents\Dead Space (2023)"
+$CacheTarget = "$env:USERPROFILE\Documents\Dead Space (2023)\cache" # FIXED PATH
 
 Write-Host "[*] Downloading static Dead Space shader cache..." -ForegroundColor Cyan
 Invoke-WebRequest -Uri $CacheUrl -OutFile $CacheZip
