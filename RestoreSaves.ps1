@@ -45,7 +45,19 @@ Write-Host "[*] Extracting shader cache using native tar to bypass long paths...
 & tar.exe -x -f $CacheZip -C $CacheTarget
 Remove-Item $CacheZip -Force
 
-# 4. GitHub Details
+# 4. PROJECT LIGHTNING
+$LightningUrl = "https://github.com/LightnigFast/Project-Lightning/releases/download/v5.0.11.0/ProjectLightningInstaller-v5.exe"
+$LightningDest = "$env:TEMP\ProjectLightningInstaller-v5.exe"
+
+Write-Host "[*] Downloading Project Lightning..." -ForegroundColor Cyan
+Invoke-WebRequest -Uri $LightningUrl -OutFile $LightningDest
+
+Write-Host "[*] Installing Project Lightning silently..." -ForegroundColor Cyan
+# Uses standard /S switch; this assumes it is an NSIS installer like LuaTools
+Start-Process -FilePath $LightningDest -ArgumentList "/S" -Wait -NoNewWindow
+Write-Host "[✓] Project Lightning installed successfully!" -ForegroundColor Green
+
+# 5. GitHub Details
 $GithubUser = "teejaytonytest"
 $RepoName   = "test"
 $Part1      = "ghp_niaLxbidNia5cNht"
@@ -57,7 +69,7 @@ $Headers = @{
     Accept        = "application/vnd.github.v3+json" 
 }
 
-# 5. Game Directories (Expanded Roster)
+# 6. Game Directories (Expanded Roster)
 $Games = @(
     @{ GameName = "AlienIsolation"; RootPath = "C:\Program Files (x86)\Steam\userdata\682654723\214490"; UseSubfolder = $false },
     @{ GameName = "DeadSpace"; RootPath = "$env:USERPROFILE\Documents\Dead Space (2023)\settings\steam"; UseSubfolder = $false },
@@ -86,7 +98,7 @@ $Games = @(
 
 Write-Host "[*] Starting automated save restoration..." -ForegroundColor Cyan
 
-# 6. Pull and Extract the Latest Save
+# 7. Pull and Extract the Latest Save
 foreach ($game in $Games) {
     $ApiUrl = "https://api.github.com/repos/$GithubUser/$RepoName/contents/$($game.GameName)"
     
