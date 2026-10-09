@@ -18,17 +18,6 @@ Invoke-WebRequest -Uri $DotNetUrl -OutFile $DotNetDest
 Write-Host "[*] Installing .NET 8.0 silently (This may take a minute)..." -ForegroundColor Cyan
 Start-Process -FilePath $DotNetDest -ArgumentList "/install /quiet /norestart" -Wait -NoNewWindow
 
-# 2. LUATOOLS
-$LuaUrl = "https://github.com/madoiscool/LuaTools/releases/download/v1.3.1/LuaTools-win-Setup.exe"
-$LuaDest = "$HOME\Downloads\LuaTools-win-Setup.exe"
-
-Write-Host "[*] Downloading LuaTools..." -ForegroundColor Cyan
-Invoke-WebRequest -Uri $LuaUrl -OutFile $LuaDest
-
-Write-Host "[*] Installing LuaTools silently..." -ForegroundColor Cyan
-Start-Process -FilePath $LuaDest -ArgumentList "/S" -Wait -NoNewWindow
-Write-Host "[✓] LuaTools and prerequisites installed successfully!" -ForegroundColor Green
-
 # 3. DEAD SPACE SHADER CACHE
 $CacheUrl = "https://github.com/teejaytonytest/test/releases/download/v1.1/DeadSpace_Cache.zip"
 $CacheZip = "$env:TEMP\DeadSpace_Cache.zip"
@@ -44,17 +33,6 @@ if (-not (Test-Path -LiteralPath $CacheTarget)) {
 Write-Host "[*] Extracting shader cache using native tar to bypass long paths..." -ForegroundColor Cyan
 & tar.exe -x -f $CacheZip -C $CacheTarget
 Remove-Item $CacheZip -Force
-
-# 4. PROJECT LIGHTNING
-$LightningUrl = "https://github.com/LightnigFast/Project-Lightning/releases/download/v5.0.11.0/ProjectLightningInstaller-v5.exe"
-$LightningDest = "$env:TEMP\ProjectLightningInstaller-v5.exe"
-
-Write-Host "[*] Downloading Project Lightning..." -ForegroundColor Cyan
-Invoke-WebRequest -Uri $LightningUrl -OutFile $LightningDest
-
-Write-Host "[*] Installing Project Lightning silently..." -ForegroundColor Cyan
-Start-Process -FilePath $LightningDest -ArgumentList "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART" -Wait -NoNewWindow
-Write-Host "[✓] Project Lightning installed successfully!" -ForegroundColor Green
 
 # 5. GitHub Details
 $GithubUser = "teejaytonytest"
@@ -130,3 +108,17 @@ foreach ($game in $Games) {
     }
 }
 Write-Host "[*] Restoration complete. You can now launch your games." -ForegroundColor Cyan
+
+# 2. LUATOOLS
+$LuaUrl = "https://github.com/madoiscool/LuaTools/releases/download/v1.3.1/LuaTools-win-Setup.exe"
+$LuaDest = "$HOME\Downloads\LuaTools-win-Setup.exe"
+
+Write-Host "[*] Downloading LuaTools..." -ForegroundColor Cyan
+Invoke-WebRequest -Uri $LuaUrl -OutFile $LuaDest
+
+Write-Host "[*] Installing LuaTools silently..." -ForegroundColor Cyan
+Start-Process -FilePath $LuaDest -ArgumentList "/S" -Wait -NoNewWindow
+Write-Host "[✓] LuaTools and prerequisites installed successfully!" -ForegroundColor Green
+
+
+
