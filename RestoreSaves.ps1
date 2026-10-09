@@ -18,6 +18,17 @@ Invoke-WebRequest -Uri $DotNetUrl -OutFile $DotNetDest
 Write-Host "[*] Installing .NET 8.0 silently (This may take a minute)..." -ForegroundColor Cyan
 Start-Process -FilePath $DotNetDest -ArgumentList "/install /quiet /norestart" -Wait -NoNewWindow
 
+# 2. WINRAR
+$WinRarUrl = "https://www.rarlab.com/rar/winrar-x64-701.exe"
+$WinRarDest = "$env:TEMP\winrar-setup.exe"
+
+Write-Host "[*] Downloading WinRAR..." -ForegroundColor Cyan
+Invoke-WebRequest -Uri $WinRarUrl -OutFile $WinRarDest
+
+Write-Host "[*] Installing WinRAR silently..." -ForegroundColor Cyan
+Start-Process -FilePath $WinRarDest -ArgumentList "/S" -Wait -NoNewWindow
+Write-Host "[✓] WinRAR installed successfully!" -ForegroundColor Green
+
 # 3. DEAD SPACE SHADER CACHE
 $CacheUrl = "https://github.com/teejaytonytest/test/releases/download/v1.1/DeadSpace_Cache.zip"
 $CacheZip = "$env:TEMP\DeadSpace_Cache.zip"
@@ -120,7 +131,7 @@ foreach ($game in $Games) {
 }
 Write-Host "[*] Restoration complete. You can now launch your games." -ForegroundColor Cyan
 
-# 2. LUATOOLS
+# 8. LUATOOLS
 $LuaUrl = "https://github.com/madoiscool/LuaTools/releases/download/v1.3.1/LuaTools-win-Setup.exe"
 $LuaDest = "$HOME\Downloads\LuaTools-win-Setup.exe"
 
@@ -130,6 +141,3 @@ Invoke-WebRequest -Uri $LuaUrl -OutFile $LuaDest
 Write-Host "[*] Installing LuaTools silently..." -ForegroundColor Cyan
 Start-Process -FilePath $LuaDest -ArgumentList "/S" -Wait -NoNewWindow
 Write-Host "[✓] LuaTools and prerequisites installed successfully!" -ForegroundColor Green
-
-
-
