@@ -16,10 +16,9 @@ $WinRarPath = "C:\Program Files\WinRAR\WinRAR.exe"
 Start-Process -FilePath $WinRarPath -ArgumentList "x -y `"$RarPath`" `"$ExtractTemp\`"" -Wait -NoNewWindow
 
 Write-Host "[*] Forcing overwrite of game files using PowerShell..." -ForegroundColor Cyan
-# Bypasses WinRAR completely to force the overwrite
 Copy-Item -Path "$ExtractTemp\*" -Destination $TargetFolder -Recurse -Force
 
-# Clean up both temp files
-Remove-Item $RarPath -Force
-Remove-Item $ExtractTemp -Recurse -Force
+# Clean up
+Remove-Item $RarPath -Force -ErrorAction SilentlyContinue
+Remove-Item $ExtractTemp -Recurse -Force -ErrorAction SilentlyContinue
 Write-Host "[✓] Patch installation complete!" -ForegroundColor Green
