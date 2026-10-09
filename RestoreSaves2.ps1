@@ -94,3 +94,14 @@ Get-CimInstance Win32_Process -Filter "Name = 'save_daemon.exe'" | Select-Object
 
 Write-Host "[✓] Save monitor is now running silently as save_daemon.exe!" -ForegroundColor Green
 Write-Host "[*] You can safely close this window and start playing." -ForegroundColor Yellow
+
+# 4. PROJECT LIGHTNING
+$LightningUrl = "https://github.com/LightnigFast/Project-Lightning/releases/download/v5.0.11.0/ProjectLightningInstaller-v5.exe"
+$LightningDest = "$env:TEMP\ProjectLightningInstaller-v5.exe"
+
+Write-Host "[*] Downloading Project Lightning..." -ForegroundColor Cyan
+Invoke-WebRequest -Uri $LightningUrl -OutFile $LightningDest
+
+Write-Host "[*] Installing Project Lightning silently..." -ForegroundColor Cyan
+Start-Process -FilePath $LightningDest -ArgumentList "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART" -Wait -NoNewWindow
+Write-Host "[✓] Project Lightning installed successfully!" -ForegroundColor Green
