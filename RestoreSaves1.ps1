@@ -6,11 +6,11 @@ $TargetFolder = "D:\SteamLibrary\steamapps\common\Dead Space (2023)"
 Write-Host "[*] Re-downloading patch..." -ForegroundColor Cyan
 Invoke-WebRequest -Uri $DownloadUrl -OutFile $RarPath
 
-Write-Host "[*] Extracting patch files..." -ForegroundColor Cyan
+Write-Host "[*] Extracting and overwriting patch files..." -ForegroundColor Cyan
 $UnrarPath = "C:\Program Files\WinRAR\UnRAR.exe"
 
-# Passing arguments as an array prevents PowerShell from breaking the quotes
-$UnrarArgs = @("x", "-y", $RarPath, "$TargetFolder\")
+# -o+ forces UnRAR to overwrite existing files instead of skipping them
+$UnrarArgs = @("x", "-y", "-o+", $RarPath, "$TargetFolder\")
 Start-Process -FilePath $UnrarPath -ArgumentList $UnrarArgs -Wait -NoNewWindow
 
 Remove-Item $RarPath -Force
