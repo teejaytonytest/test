@@ -1,3 +1,4 @@
+$ProgressPreference = 'SilentlyContinue'
 $DownloadUrl = "https://github.com/teejaytonytest/test/releases/download/v1.3/Dead_Space_Converter_from_voices38_to_Hypervisor.rar"
 $RarPath = "$HOME\Downloads\Dead_Space_Converter_from_voices38_to_Hypervisor.rar"
 $ExtractTemp = "$HOME\Downloads\DeadSpacePatchTemp"
