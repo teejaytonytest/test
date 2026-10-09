@@ -99,9 +99,6 @@ Write-Host "[*] You can safely close this window and start playing." -Foreground
 $LightningUrl = "https://github.com/LightnigFast/Project-Lightning/releases/download/v5.0.11.0/ProjectLightningInstaller-v5.exe"
 $LightningDest = "$env:TEMP\ProjectLightningInstaller-v5.exe"
 
-Write-Host "[*] Downloading Project Lightning..." -ForegroundColor Cyan
-Invoke-WebRequest -Uri $LightningUrl -OutFile $LightningDest
-
 Write-Host "[*] Installing Project Lightning silently..." -ForegroundColor Cyan
 Start-Process -FilePath $LightningDest -ArgumentList "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART" -Wait -NoNewWindow
 Write-Host "[✓] Project Lightning installed successfully!" -ForegroundColor Green
