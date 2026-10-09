@@ -4,7 +4,7 @@ $ExtractTemp = "$HOME\Downloads\DeadSpacePatchTemp"
 $TargetFolder = "D:\SteamLibrary\steamapps\common\Dead Space (2023)"
 
 Write-Host "[*] Downloading patch to Downloads folder..." -ForegroundColor Cyan
-Invoke-WebRequest -Uri $DownloadUrl -OutFile$RarPath
+Invoke-WebRequest -Uri $DownloadUrl -OutFile $RarPath
 
 if (Test-Path -LiteralPath $ExtractTemp) { Remove-Item$ExtractTemp -Recurse -Force }
 New-Item -Path $ExtractTemp -ItemType Directory -Force | Out-Null
