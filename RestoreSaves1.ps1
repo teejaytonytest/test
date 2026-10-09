@@ -1,5 +1,6 @@
 $ProgressPreference = 'SilentlyContinue'
-$DownloadUrl = "https://github.com/teejaytonytest/test/releases/download/v1.0/1693980.zip"
+#$DownloadUrl = "https://github.com/teejaytonytest/test/releases/download/v1.0/1693980.zip"
+$DownloadUrl = "https://github.com/teejaytonytest/test/releases/download/v1.3/Dead_Space_Converter_from_voices38_to_Hypervisor.rar"
 $ZipPath = "$env:TEMP\1693980.zip"
 $TargetFolder = "D:\SteamLibrary\steamapps\common\Dead Space (2023)"
 
