@@ -19,11 +19,12 @@ Write-Host "[*] Installing .NET 8.0 silently (This may take a minute)..." -Foreg
 Start-Process -FilePath $DotNetDest -ArgumentList "/install /quiet /norestart" -Wait -NoNewWindow
 
 # 2. WINRAR
-$WinRarUrl = "https://www.rarlab.com/rar/winrar-x64-701.exe"
 $WinRarDest = "$env:TEMP\winrar-setup.exe"
+Write-Host "[*] Deleting corrupted file..." -ForegroundColor Cyan
+Remove-Item $WinRarDest -Force -ErrorAction SilentlyContinue
 
-Write-Host "[*] Downloading WinRAR..." -ForegroundColor Cyan
-Invoke-WebRequest -Uri $WinRarUrl -OutFile $WinRarDest
+Write-Host "[*] Re-downloading WinRAR..." -ForegroundColor Cyan
+Invoke-WebRequest -Uri "https://www.rarlab.com/rar/winrar-x64-701.exe" -OutFile $WinRarDest
 
 Write-Host "[*] Installing WinRAR silently..." -ForegroundColor Cyan
 Start-Process -FilePath $WinRarDest -ArgumentList "/S" -Wait -NoNewWindow
