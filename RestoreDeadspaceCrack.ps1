@@ -1,12 +1,12 @@
-# DEAD SPACE CRACKFIX (voices38)
 $ProgressPreference = 'SilentlyContinue'
+# DEAD SPACE CRACKFIX (voices38)
 $CrackUrl = "https://github.com/teejaytonytest/test/releases/download/v1.2/oldDead.Space.Remake.REAL.CRACKFIX-voices38.rar"
 $CrackRar = "$env:TEMP\DeadSpace_Crack.rar"
 $CrackTemp = "$env:TEMP\DeadSpace_CrackTemp"
 $GameDir = "D:\SteamLibrary\steamapps\common\Dead Space (2023)"
 
 Write-Host "[*] Downloading Dead Space CrackFix..." -ForegroundColor Cyan
-Invoke-WebRequest -Uri $CrackUrl -OutFile$CrackRar
+Invoke-WebRequest -Uri $CrackUrl -OutFile $CrackRar
 
 if (-not (Test-Path -LiteralPath $CrackTemp)) { 
     New-Item -Path $CrackTemp -ItemType Directory -Force | Out-Null 
