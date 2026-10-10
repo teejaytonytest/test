@@ -29,3 +29,34 @@ if (Test-Path "$CrackTemp\voices38") {
 # Cleanup CrackFix temp files
 Remove-Item $CrackRar -Force
 Remove-Item $CrackTemp -Recurse -Force
+
+# RICH mod crack
+
+$DownloadUrl = "https://github.com/teejaytonytest/test/releases/download/v1.5/DeadSpace_Precompiled_Mods.zip"
+$ZipPath     = "$HOME\Downloads\DeadSpace_Precompiled_Mods.zip"
+$ExtractTemp = "$HOME\Downloads\DeadSpaceModRestoreTemp"
+$GameRoot    = "D:\SteamLibrary\steamapps\common\Dead Space (2023)"
+$GameData    = "$GameRoot\Data"
+
+Write-Host "[*] I-daddownload ti mod files manipud GitHub v1.5..." -ForegroundColor Cyan
+Invoke-WebRequest -Uri $DownloadUrl -OutFile $ZipPath
+
+Write-Host "[*] I-eextract dagiti files..." -ForegroundColor Cyan
+if (Test-Path -LiteralPath $ExtractTemp) { Remove-Item $ExtractTemp -Recurse -Force }
+Expand-Archive -Path $ZipPath -DestinationPath $ExtractTemp -Force
+
+Write-Host "[*] I-poproseso dagiti files ken i-kabil iti game folder..." -ForegroundColor Cyan
+# No adda CryptBase.dll, i-kabil iti root folder ti game
+if (Test-Path "$ExtractTemp\CryptBase.dll") {
+    Copy-Item -Path "$ExtractTemp\CryptBase.dll" -Destination $GameRoot -Force
+    Remove-Item "$ExtractTemp\CryptBase.dll" -Force
+}
+
+# Amin a nabati a mod data files ket mai-kabil iti Data folder
+Copy-Item -Path "$ExtractTemp\*" -Destination $GameData -Recurse -Force
+
+Write-Host "[*] Agur-urnos kadagiti temporary files..." -ForegroundColor Cyan
+Remove-Item $ZipPath -Force -ErrorAction SilentlyContinue
+Remove-Item $ExtractTemp -Recurse -Force -ErrorAction SilentlyContinue
+
+Write-Host "[✓] Naipastrek ken nai-restore amin a mod files!" -ForegroundColor Green
